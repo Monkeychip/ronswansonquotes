@@ -41,3 +41,7 @@ h2 {
     background-color: #9FCEE2;
     margin-left:50px;
 }
+
+#quote_rating {
+    border:none !important;
+}
