@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Field, reduxForm } from "redux-form";
+//import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+
 
 import {
   fetchData,
@@ -28,6 +29,9 @@ class AddQuote extends Component {
   constructor() {
     super();
     this.addRow = this.addRow.bind(this);
+    this.state = {
+      inputValue: ''
+    };
   }
 
   componentDidMount() {
@@ -37,11 +41,16 @@ class AddQuote extends Component {
   addRow = () => {
     const data = {
       quote: this.props.quote[0],
-      //quote:"testing a quote",
-      rate: 100 //make input value eventually
+      rate: this.state.inputValue
     };
-    this.props.addRowToList(data); //send data to Action Creator and store in Redux
+    this.props.addRowToList(data);
   };
+
+  updateInputValue(evt) {
+    this.setState({
+      inputValue: evt.target.value
+    });
+  }
 
   render() {
 
@@ -58,7 +67,10 @@ class AddQuote extends Component {
                     <div >
                       <label>Your Quote Rating</label>
                     </div>
-                     <Field name="number" type="number" component={renderField} />
+
+                    <div className="ui input focus" id="quote_rating">
+                      <input className="center aligned" type="number" placeholder="5" value={this.state.inputValue} onChange={evt => this.updateInputValue(evt)}/>
+                    </div>
                   </div>
                 </form>
               </td>
@@ -95,11 +107,6 @@ function mapDispatchToProps(dispatch) {
     dispatch
   );
 }
-
-AddQuote = reduxForm({
-  form: "quote"
-})(AddQuote);
-
 
 export default connect(
   mapStateToProps,

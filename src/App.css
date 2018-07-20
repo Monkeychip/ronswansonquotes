@@ -43,5 +43,6 @@ h2 {
 }
 
 #quote_rating {
-    border:none !important;
+    border-color: #9FCEE2 !important;
+    padding-top:10px !important;
 }
