@@ -12,9 +12,7 @@ class QuoteList extends Component {
         <div className="four wide column center aligned">
           <AddQuote />
         </div>
-        <table className="ui celled padded table">
-            <QuoteRow />
-        </table>
+          <QuoteRow />
       </div>
     );
   }

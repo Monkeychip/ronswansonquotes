@@ -76,11 +76,12 @@ class QuoteRow extends Component {
 
     return (
       <div>
+        <table className="ui celled padded table">
         <thead>
           <tr >
             <th className="ui blue Change" onClick={() => this.sortBy('quote')}>Quote</th>
-            <th className="ui blue Change" onClick={() => this.sortBy('rate')}>Rating</th>
-            <th className="ui Change_Red ">Delete</th>
+            <th className="ui blue Change center aligned" onClick={() => this.sortBy('rate')}>Rating</th>
+            <th className="ui Change_Red center aligned">Delete</th>
           </tr>
         </thead>
       <tbody>
@@ -98,6 +99,7 @@ class QuoteRow extends Component {
             </tr>
           ))}
         </tbody>
+        </table>
       </div>
     );
   }

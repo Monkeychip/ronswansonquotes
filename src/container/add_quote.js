@@ -48,7 +48,7 @@ class AddQuote extends Component {
                 <form onSubmit={handleSubmit}>
                   <div className="field">
                     <div >
-                      <label>Your Quote Rating</label>
+                      <label>Rate the Quote</label>
                     </div>
 
                     <div className="ui input focus" id="quote_rating">
