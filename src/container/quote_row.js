@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import {
-  fetchData
+  fetchData,
+  addRowToList
 } from "../actions/action_index";
 import "../App.css";
 
@@ -36,6 +37,7 @@ class QuoteRow extends Component {
   };
 
   render(){
+    console.log(this.props.row,"this.props.row")
     return (
           <tbody>
           {this.state.rows.map((data, index) => (
@@ -59,14 +61,16 @@ class QuoteRow extends Component {
 
 function mapStateToProps(state) {
   return {
-    quote: state.quote
+    quote: state.quote,
+    row: state.row
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      fetchData
+      fetchData,
+      addRowToList
     },
     dispatch
   );
@@ -78,64 +82,3 @@ export default connect(
 )(QuoteRow);
 
 
-/*
-* let rows = this.state.data.map(person => {
-      return <PersonRow key = {
-        person.id
-      }
-      data = {
-        person
-      }
-      />
-    })
-    return <table >
-      < tbody > {
-        rows
-      } < /tbody> < /table>
-  }
-}
-
-const PersonRow = (props) => {
-  return (
-    <tr>
-      <td>
-        { props.data.id }
-      </td>
-      <td>
-        { props.data.name }
-      </td>
-    </tr>
-  );
-*
-*
-*
-*
-* var RecordsComponent = React.createClass({
-    getInitialState: {
-        return {
-          rows: ['row 1', 'row 2', 'row 3']
-        }
-    },
-    render : function() {
-        return (
-            <div>
-                <table>
-                    {rows.map((r) => (
-                      <tr>
-                          <td>{r}</td>
-                      </tr>
-                    ))}
-                </table>
-                <button id="addBtn" onClick={addRow}>ADD</button>
-            </div>
-        );
-    },
-    addRow : function() {
-        var rows = this.state.rows
-        rows.push('new row')
-        this.setState({rows: rows})
-    },
-});
-
-React.render(<RecordsComponent/>, document.getElementById('display'))
-* */

@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 
 import {
   fetchData,
-  fetchQuote
+  addRowToList
 } from "../actions/action_index";
 import "../App.css";
 
@@ -28,9 +28,6 @@ class AddQuote extends Component {
   constructor() {
     super();
     this.addRow = this.addRow.bind(this);
-    this.state = {
-      rows: [{}],
-    };
   }
 
   componentDidMount() {
@@ -39,23 +36,14 @@ class AddQuote extends Component {
 
   addRow = () => {
     const data = {
-      quote: this.props.quote,
+      quote: this.props.quote[0],
+      //quote:"testing a quote",
       rate: 100 //make input value eventually
     };
-    console.log(data,"data");
-    this.setState({
-      rows: [...this.state.rows, data]
-    });
-    console.log(this.state.rows.quote,"here")
+    this.props.addRowToList(data); //send data to Action Creator and store in Redux
   };
 
   render() {
-    if (this.state.hasErrored) {
-      return <p>Sorry! There was an error loading the quotes</p>;
-    }
-    if (this.state.isLoading) {
-      return <p>Loading…</p>;
-    }
 
     const { handleSubmit } = this.props;
     return (
@@ -101,7 +89,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      fetchData
+      fetchData,
+      addRowToList
     },
     dispatch
   );
@@ -116,4 +105,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(AddQuote);
-

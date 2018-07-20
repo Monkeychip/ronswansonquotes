@@ -1,5 +1,6 @@
 import {
-  FETCH_QUOTE
+  FETCH_QUOTE,
+  ADD_ROW
 } from './types';
 
 export function itemsHasErrored(bool) {
@@ -38,5 +39,14 @@ export function fetchQuote(quote){
   return {
     type: FETCH_QUOTE,
     payload: quote
+  }
+}
+
+export function addRowToList(data){
+
+console.log(data,"from addrowtolist ac")
+  return {
+    type: ADD_ROW,
+    payload: data
   }
 }
