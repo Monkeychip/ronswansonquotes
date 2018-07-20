@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import "../App.css";
 import QuoteRow from "../container/quote_row";
-import Quote from "../container/add_quote";
+import AddQuote from "../container/add_quote";
 
 
 class QuoteList extends Component {
@@ -10,7 +10,7 @@ class QuoteList extends Component {
     return (
       <div className="ui container">
         <div className="four wide column center aligned">
-          <Quote />
+          <AddQuote />
         </div>
         <table className="ui celled padded table">
           <thead>
@@ -27,7 +27,3 @@ class QuoteList extends Component {
 
 export default QuoteList;
 
-/*
-* Add click event to rating to resort
-*
-* */

@@ -1,5 +1,12 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
+import {
+  fetchData,
+  fetchQuote
+} from "../actions/action_index";
 import "../App.css";
 
 
@@ -17,16 +24,46 @@ const renderField = ({ input, type }) => (
 );
 
 
-class Quote extends Component {
+class AddQuote extends Component {
+  constructor() {
+    super();
+    this.addRow = this.addRow.bind(this);
+    this.state = {
+      rows: [{}],
+    };
+  }
+
+  componentDidMount() {
+    this.props.fetchData();
+  }
+
+  addRow = () => {
+    const data = {
+      quote: this.props.quote,
+      rate: 100 //make input value eventually
+    };
+    console.log(data,"data");
+    this.setState({
+      rows: [...this.state.rows, data]
+    });
+    console.log(this.state.rows.quote,"here")
+  };
 
   render() {
+    if (this.state.hasErrored) {
+      return <p>Sorry! There was an error loading the quotes</p>;
+    }
+    if (this.state.isLoading) {
+      return <p>Loading…</p>;
+    }
+
     const { handleSubmit } = this.props;
     return (
         <div>
           <table className="ui celled padded table">
             <tbody>
             <tr>
-              <td>future quote from him here which rerenders everytime they add</td>
+              <td>{this.props.quote}</td>
               <td className="center aligned">
                 <form onSubmit={handleSubmit}>
                   <div className="field">
@@ -42,6 +79,7 @@ class Quote extends Component {
                 type="submit"
                 id="add_quote"
                 className="ui button"
+                onClick={this.addRow}
                 >
                 Add Quote
               </button>
@@ -54,13 +92,28 @@ class Quote extends Component {
   }
 }
 
-Quote = reduxForm({
+function mapStateToProps(state) {
+  return {
+    quote: state.quote
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      fetchData
+    },
+    dispatch
+  );
+}
+
+AddQuote = reduxForm({
   form: "quote"
-})(Quote);
+})(AddQuote);
 
-export default Quote;
 
-/*
-* First focusing on passing the number
-* then
-* */
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddQuote);
+
