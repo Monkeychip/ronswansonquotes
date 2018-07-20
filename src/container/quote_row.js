@@ -1,32 +1,23 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
+import {
+  fetchData,
+  fetchQuote
+} from "../actions/action_index";
 import "../App.css";
 
 class QuoteRow extends Component {
   constructor() {
     super();
     this.state = {
-      quotes: [],
+      quote: [],
     };
   }
 
-  fetchData(url) {
-    this.setState({ isLoading: true });
-    fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-        this.setState({ isLoading: false });
-        return response;
-      })
-      .then((response) => response.json())
-      .then((quotes) => this.setState({ quotes }))
-      .catch(() => this.setState({ hasErrored: true }));
-  }
-
   componentDidMount() {
-    this.fetchData('https://ron-swanson-quotes.herokuapp.com/v2/quotes');
+    this.props.fetchData();
   }
 
   render(){
@@ -41,7 +32,7 @@ class QuoteRow extends Component {
           <tbody>
           <tr>
             <td>
-              {this.state.quotes}
+              {this.props.quote}
             </td>
             <td className="center aligned">
               2
@@ -55,9 +46,52 @@ class QuoteRow extends Component {
   }
 }
 
-export default QuoteRow;
+function mapStateToProps(state) {
+  return {
+    quote: state.quote
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      fetchQuote,
+      fetchData
+    },
+    dispatch
+  );
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(QuoteRow);
 
 /*
-* Data comes in from store object
-* select option
-* */
+* class ActivitiesChart extends Component {
+\\\
+getData() {
+  let code = this.props.fetchCode();
+  let thisYearsActivities = store.getState().thisYearsActivities;
+  let lastYearsActivites = store.getState().activities;
+
+  if (code.payload !== "no code") {
+    //if no activities for either last or this year, then run the fetch, otherwise, do nothing
+    !thisYearsActivities ? this.props.fetchActivitiesWithCodeThisYear() : "";
+    !lastYearsActivites ? this.props.fetchActivitiesWithCode() : "" ;
+  } else {
+    !thisYearsActivities ? this.props.fetchThisYear() : "";
+    !lastYearsActivites ? this.props.fetchActivities() : "";
+  }
+}
+
+componentDidMount() {
+  this.getData();
+  this.setState({ goal: localStorage.getItem("goal") });
+}
+
+render() {
+  if (!this.props.activitiesArray) {
+    return <div>Loading Activities ...</div>;
+  } else {
+*/
