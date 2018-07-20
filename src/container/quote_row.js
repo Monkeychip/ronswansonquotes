@@ -28,7 +28,6 @@ class QuoteRow extends Component {
       ],
     };
   }
-
   //curried function
   removeRow = (index) => () => {
     const rows = [...this.state.rows]
@@ -36,8 +35,18 @@ class QuoteRow extends Component {
     this.setState({ rows });
   };
 
+  componentWillReceiveProps(newProps) {
+    if(newProps.row !== 0) {
+      this.setState({
+        rows: [...this.state.rows, newProps.row]
+      })
+    }else{
+      //do nothing
+    }
+  }
+
   render(){
-    console.log(this.props.row,"this.props.row")
+
     return (
           <tbody>
           {this.state.rows.map((data, index) => (

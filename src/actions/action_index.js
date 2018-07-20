@@ -44,7 +44,6 @@ export function fetchQuote(quote){
 
 export function addRowToList(data){
 
-console.log(data,"from addrowtolist ac")
   return {
     type: ADD_ROW,
     payload: data

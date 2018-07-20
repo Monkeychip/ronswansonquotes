@@ -1,29 +1,12 @@
 import React, { Component } from "react";
-//import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
 
 import {
   fetchData,
   addRowToList
 } from "../actions/action_index";
 import "../App.css";
-
-
-const renderField = ({ input, type }) => (
-  <div className="ui right labeled input">
-    <input
-      {...input}
-      className="one wide field"
-      placeholder="5"
-      type={type}
-      max={100}
-      id="quote_rating"
-    />
-  </div>
-);
-
 
 class AddQuote extends Component {
   constructor() {
