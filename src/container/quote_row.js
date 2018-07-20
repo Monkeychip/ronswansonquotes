@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { createSelector } from 'reselect'
 
 import {
   fetchData,
@@ -8,9 +9,21 @@ import {
 } from "../actions/action_index";
 import "../App.css";
 
+const headerRow = ({quote, rate, removeAction}) => {
+  <thead>
+    <tr>
+      <th>{quote}</th>
+      <th>{rate}</th>
+      <th>{removeAction}</th>
+    </tr>
+  </thead>
+}
+
 class QuoteRow extends Component {
   constructor() {
     super();
+    this.sortBy.bind(this);
+    this.compareBy.bind(this);
     this.state = {
       rows: [
         {
@@ -28,6 +41,20 @@ class QuoteRow extends Component {
       ],
     };
   }
+  compareBy(key) {
+    return function (a, b) {
+      if (a[key] < b[key]) return -1;
+      if (a[key] > b[key]) return 1;
+      return 0;
+    };
+  }
+
+  sortBy(key) {
+    let arrayCopy = [...this.state.rows];
+    arrayCopy.sort(this.compareBy(key));
+    this.setState({rows: arrayCopy});
+  }
+
   //curried function
   removeRow = (index) => () => {
     const rows = [...this.state.rows]
@@ -48,7 +75,15 @@ class QuoteRow extends Component {
   render(){
 
     return (
-          <tbody>
+      <div>
+        <thead>
+          <tr >
+            <th className="ui blue Change" onClick={() => this.sortBy('quote')}>Quote</th>
+            <th className="ui blue Change" onClick={() => this.sortBy('rate')}>Rating</th>
+            <th className="ui Change_Red ">Delete</th>
+          </tr>
+        </thead>
+      <tbody>
           {this.state.rows.map((data, index) => (
             <tr key={index}>
               <td>
@@ -58,12 +93,12 @@ class QuoteRow extends Component {
                 {this.state.rows[index].rate}
               </td>
               <td className="center aligned">
-                <i className="icon minus circle center" onClick={this.removeRow(index)}></i>
+                <i className="icon trash alternate outline center" onClick={this.removeRow(index)}></i>
               </td>
             </tr>
           ))}
-
-          </tbody>
+        </tbody>
+      </div>
     );
   }
 }

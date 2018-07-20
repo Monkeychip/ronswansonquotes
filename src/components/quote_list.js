@@ -13,11 +13,6 @@ class QuoteList extends Component {
           <AddQuote />
         </div>
         <table className="ui celled padded table">
-          <thead>
-          <tr><th className="single line">Quote</th>
-            <th>Rating</th>
-            <th>Remove</th>
-            </tr></thead>
             <QuoteRow />
         </table>
       </div>

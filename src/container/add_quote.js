@@ -57,11 +57,10 @@ class AddQuote extends Component {
                   </div>
                 </form>
               </td>
-              <td>
+              <td className="center aligned">
                 <button
                 type="submit"
-                id="add_quote"
-                className="ui button"
+                className="ui button blue Change"
                 onClick={this.addRow}
                 >
                 Add Quote

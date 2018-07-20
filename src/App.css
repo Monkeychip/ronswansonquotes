@@ -37,12 +37,25 @@ h2 {
     z-index:0 !important;
 }
 
-#add_quote {
-    background-color: #9FCEE2;
-    margin-left:50px;
-}
-
 #quote_rating {
     border-color: #9FCEE2 !important;
     padding-top:10px !important;
+}
+
+.ui.blue.Change {
+    radius:none !important;
+    background-color: #9FCEE2 !important;
+    color:rgba(0,0,0,0.6) !important;
+}
+
+.ui.blue.Change:hover {
+    background-color: rgba(159,206,226,0.5) !important;
+}
+
+.Change_Red {
+    background-color: rgba(219,78,56,0.8) !important;
+}
+
+.icon:hover {
+    color: rgba(219,78,56,0.8) !important;
 }
