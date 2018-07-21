@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './App.css';
 import Title from './components/title';
-import QuoteList from './components/quote_list';
+import QuoteList from './components/quote_table';
 
 
 class App extends Component {
