@@ -4,7 +4,7 @@ import "../App.css";
 import QuoteRow from "../container/quote_row";
 import AddQuote from "../container/add_quote";
 
-class QuoteList extends Component {
+class QuoteTable extends Component {
   render() {
     return (
       <div className="ui container">
@@ -17,4 +17,4 @@ class QuoteList extends Component {
   }
 }
 
-export default QuoteList;
+export default QuoteTable;
