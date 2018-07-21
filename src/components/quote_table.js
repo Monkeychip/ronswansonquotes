@@ -11,7 +11,7 @@ class QuoteList extends Component {
         <div className="four wide column center aligned">
           <AddQuote />
         </div>
-        <QuoteRow />
+          <QuoteRow />
       </div>
     );
   }

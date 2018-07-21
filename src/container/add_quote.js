@@ -10,16 +10,16 @@ class AddQuote extends Component {
     super();
     this.addRow = this.addRow.bind(this);
     this.state = {
-      inputValue: ""
+      inputValue: "" //initialize inputValue to nothing, used to keep track of quote's rating
     };
   }
 
   addRow = () => {
     const data = {
-      quote: this.props.quote[0],
-      rate: this.state.inputValue
+      quote: this.props.quote[0], //pulling quote from Redux store
+      rate: this.state.inputValue //pulling rate number from inputValue on component's state
     };
-    this.props.addRowToList(data);
+    this.props.addRowToList(data); //passing to action creator addRowToList, saving on Redux Store to retrieve in sibling component
   };
 
   updateInputValue(evt) {
@@ -29,7 +29,7 @@ class AddQuote extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchData();
+    this.props.fetchData(); //update the displayed quote
   }
 
   render() {
@@ -79,15 +79,15 @@ class AddQuote extends Component {
 
 function mapStateToProps(state) {
   return {
-    quote: state.quote
+    quote: state.quote //return the quote from the Redux store, and make accessible via props
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      fetchData,
-      addRowToList
+      fetchData, //bind the action creator so that fetchData is called every time component mounts
+      addRowToList //bind so that component can send data to this action creator
     },
     dispatch
   );
