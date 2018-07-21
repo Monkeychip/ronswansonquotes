@@ -17,10 +17,6 @@ class AddQuote extends Component {
     };
   }
 
-  componentDidMount() {
-    this.props.fetchData();
-  }
-
   addRow = () => {
     const data = {
       quote: this.props.quote[0],
@@ -29,20 +25,24 @@ class AddQuote extends Component {
     this.props.addRowToList(data);
   };
 
-  updateInputValue(evt) {
+    updateInputValue(evt) {
     this.setState({
       inputValue: evt.target.value
     });
   }
 
-  render() {
+  componentDidMount() {
+    this.props.fetchData();
+  }
 
+  render() {
     const { handleSubmit } = this.props;
+
     return (
         <div>
           <table className="ui celled padded table">
             <tbody>
-            <tr>
+            <tr >
               <td>{this.props.quote}</td>
               <td className="center aligned">
                 <form onSubmit={handleSubmit}>

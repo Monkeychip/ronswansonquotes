@@ -9,22 +9,14 @@ import {
 } from "../actions/action_index";
 import "../App.css";
 
-const headerRow = ({quote, rate, removeAction}) => {
-  <thead>
-    <tr>
-      <th>{quote}</th>
-      <th>{rate}</th>
-      <th>{removeAction}</th>
-    </tr>
-  </thead>
-}
-
 class QuoteRow extends Component {
   constructor() {
     super();
     this.sortBy.bind(this);
     this.compareBy.bind(this);
+    //this.handleSelect = this.handleSelect.bind(this);
     this.state = {
+      activeIndex: -1,
       rows: [
         {
           quote: "I'm a simple man.  I like pretty, dark-haired women and breakfast food.",
@@ -62,6 +54,10 @@ class QuoteRow extends Component {
     this.setState({ rows });
   };
 
+  handleSelect = (index) => () => {
+    this.setState({ activeIndex: index})
+  }
+
   componentWillReceiveProps(newProps) {
     if(newProps.row !== 0) {
       this.setState({
@@ -73,7 +69,6 @@ class QuoteRow extends Component {
   }
 
   render(){
-
     return (
       <div>
         <table className="ui celled padded table">
@@ -86,7 +81,7 @@ class QuoteRow extends Component {
         </thead>
       <tbody>
           {this.state.rows.map((data, index) => (
-            <tr key={index}>
+            <tr key={index} onClick={this.handleSelect(index)} className={this.state.activeIndex === index ? 'active' : ''}>
               <td>
                 {this.state.rows[index].quote}
               </td>
