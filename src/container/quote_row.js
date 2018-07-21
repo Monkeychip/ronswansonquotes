@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import "../App.css";
 
-class QuoteRow extends Component {
+export class QuoteRow extends Component {
   constructor() {
     super();
     this.sortBy.bind(this);

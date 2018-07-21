@@ -5,12 +5,13 @@ import { bindActionCreators } from "redux";
 import { fetchData, addRowReturnNewQuote } from "../actions/action_index";
 import "../App.css";
 
-class AddQuote extends Component {
+export class AddQuote extends Component {
   constructor() {
     super();
     this.addRow = this.addRow.bind(this);
     this.state = {
-      inputValue: "" //initialize inputValue to nothing, used to keep track of quote's rating
+      inputValue: "", //initialize inputValue to nothing, used to keep track of quote's rating
+      quote: ""
     };
   }
 

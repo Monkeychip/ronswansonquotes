@@ -19,7 +19,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <Title />,
-        <QuoteList />,
+        <QuoteTable />,
       ],
       "className": "App ui grid center aligned container",
     },
@@ -54,7 +54,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <Title />,
-          <QuoteList />,
+          <QuoteTable />,
         ],
         "className": "App ui grid center aligned container",
       },

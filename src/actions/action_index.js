@@ -14,7 +14,7 @@ export function itemsIsLoading(bool) {
 }
 
 export function fetchData() {
-  console.log("here")
+
   return dispatch => {
     dispatch(itemsIsLoading(true));
     fetch("https://ron-swanson-quotes.herokuapp.com/v2/quotes")
