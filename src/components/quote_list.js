@@ -4,7 +4,6 @@ import "../App.css";
 import QuoteRow from "../container/quote_row";
 import AddQuote from "../container/add_quote";
 
-
 class QuoteList extends Component {
   render() {
     return (
@@ -12,11 +11,10 @@ class QuoteList extends Component {
         <div className="four wide column center aligned">
           <AddQuote />
         </div>
-          <QuoteRow />
+        <QuoteRow />
       </div>
     );
   }
 }
 
 export default QuoteList;
-

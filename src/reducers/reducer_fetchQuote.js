@@ -1,9 +1,9 @@
-import { FETCH_QUOTE } from '../actions/types';
+import { FETCH_QUOTE } from "../actions/types";
 
 export default function(state = 0, action) {
-  switch(action.type) {
+  switch (action.type) {
     case FETCH_QUOTE:
       return action.payload;
   }
   return state;
-};
+}

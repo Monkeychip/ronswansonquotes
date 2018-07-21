@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { createSelector } from 'reselect'
+import { createSelector } from "reselect";
 
-import {
-  fetchData,
-  addRowToList
-} from "../actions/action_index";
+import { fetchData, addRowToList } from "../actions/action_index";
 import "../App.css";
 
 class QuoteRow extends Component {
@@ -14,12 +11,12 @@ class QuoteRow extends Component {
     super();
     this.sortBy.bind(this);
     this.compareBy.bind(this);
-    //this.handleSelect = this.handleSelect.bind(this);
     this.state = {
       activeIndex: -1,
       rows: [
         {
-          quote: "I'm a simple man.  I like pretty, dark-haired women and breakfast food.",
+          quote:
+            "I'm a simple man.  I like pretty, dark-haired women and breakfast food.",
           rate: 10
         },
         {
@@ -27,14 +24,15 @@ class QuoteRow extends Component {
           rate: 2
         },
         {
-          quote: "Tom, I took the quiz in your book about what kind of person I am. I’m a Ron.”",
+          quote:
+            "Tom, I took the quiz in your book about what kind of person I am. I’m a Ron.”",
           rate: 22
-        },
-      ],
+        }
+      ]
     };
   }
   compareBy(key) {
-    return function (a, b) {
+    return function(a, b) {
       if (a[key] < b[key]) return -1;
       if (a[key] > b[key]) return 1;
       return 0;
@@ -44,56 +42,72 @@ class QuoteRow extends Component {
   sortBy(key) {
     let arrayCopy = [...this.state.rows];
     arrayCopy.sort(this.compareBy(key));
-    this.setState({rows: arrayCopy});
+    this.setState({ rows: arrayCopy });
   }
 
   //curried function
-  removeRow = (index) => () => {
-    const rows = [...this.state.rows]
-    rows.splice(index,1)
+  removeRow = index => () => {
+    const rows = [...this.state.rows];
+    rows.splice(index, 1);
     this.setState({ rows });
   };
 
-  handleSelect = (index) => () => {
-    this.setState({ activeIndex: index})
-  }
+  //curried function
+  handleSelect = index => () => {
+    this.setState({ activeIndex: index });
+  };
 
   componentWillReceiveProps(newProps) {
-    if(newProps.row !== 0) {
+    if (newProps.row !== 0) {
       this.setState({
         rows: [...this.state.rows, newProps.row]
-      })
-    }else{
+      });
+    } else {
       //do nothing
     }
   }
 
-  render(){
+  render() {
     return (
       <div>
         <table className="ui celled padded selectable table">
-        <thead>
-          <tr >
-            <th className="ui blue Change" onClick={() => this.sortBy('quote')}>Quote</th>
-            <th className="ui blue Change center aligned" onClick={() => this.sortBy('rate')}>Rating</th>
-            <th className="ui Change_Red center aligned">Delete</th>
-          </tr>
-        </thead>
-      <tbody>
-          {this.state.rows.map((data, index) => (
-            <tr key={index} onClick={this.handleSelect(index)} className={this.state.activeIndex === index ? 'active' : ''}>
-              <td>
-                {this.state.rows[index].quote}
-              </td>
-              <td className="center aligned">
-                {this.state.rows[index].rate}
-              </td>
-              <td className="center aligned">
-                <i className="icon trash alternate outline center" onClick={this.removeRow(index)}></i>
-              </td>
+          <thead>
+            <tr>
+              <th
+                className="ui blue Change"
+                onClick={() => this.sortBy("quote")}
+              >
+                Quote
+              </th>
+              <th
+                className="ui blue Change center aligned"
+                onClick={() => this.sortBy("rate")}
+              >
+                Rating
+              </th>
+              <th className="ui Change_Red center aligned">Delete</th>
             </tr>
-          ))}
-        </tbody>
+          </thead>
+          <tbody>
+            {this.state.rows.map((data, index) => (
+              <tr
+                key={index}
+                onClick={this.handleSelect(index)}
+                className={this.state.activeIndex === index ? "active" : ""}
+              >
+                <td>{this.state.rows[index].quote}</td>
+                <td className="center aligned">
+                  {this.state.rows[index].rate}
+                </td>
+                <td className="center aligned">
+                  <i
+                    className="icon trash alternate outline center"
+                    onClick={this.removeRow(index)}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     );
@@ -104,7 +118,7 @@ function mapStateToProps(state) {
   return {
     quote: state.quote,
     row: state.row
-  }
+  };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -121,5 +135,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(QuoteRow);
-
-
