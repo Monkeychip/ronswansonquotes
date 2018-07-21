@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { createSelector } from "reselect";
 
-import { fetchData, addRowToList } from "../actions/action_index";
 import "../App.css";
 
 class QuoteRow extends Component {
@@ -13,7 +10,7 @@ class QuoteRow extends Component {
     this.compareBy.bind(this);
     this.state = {
       activeIndex: -1,
-      rows: [
+      rows: [ //setting up default data.  Quotes shouldn't exist in API and therefor will not repeat
         {
           quote:
             "I'm a simple man.  I like pretty, dark-haired women and breakfast food.",
@@ -21,16 +18,17 @@ class QuoteRow extends Component {
         },
         {
           quote: "Don’t get emotional Vaughn, you’re embarrassing yourself.",
-          rate: 2
+          rate: 20
         },
         {
           quote:
             "Tom, I took the quiz in your book about what kind of person I am. I’m a Ron.”",
-          rate: 22
+          rate: 2
         }
       ]
     };
   }
+
   compareBy(key) {
     return function(a, b) {
       if (a[key] < b[key]) return -1;
@@ -39,7 +37,7 @@ class QuoteRow extends Component {
     };
   }
 
-  sortBy(key) {
+  sortBy(key) { //sort the array of rows based on either rate or quote
     let arrayCopy = [...this.state.rows];
     arrayCopy.sort(this.compareBy(key));
     this.setState({ rows: arrayCopy });
@@ -48,16 +46,16 @@ class QuoteRow extends Component {
   //curried function
   removeRow = index => () => {
     const rows = [...this.state.rows];
-    rows.splice(index, 1);
-    this.setState({ rows });
+    rows.splice(index, 1); //remove the row based on index
+    this.setState({ rows }); //update rows state without the deleted row
   };
 
   //curried function
   handleSelect = index => () => {
-    this.setState({ activeIndex: index });
+    this.setState({ activeIndex: index }); //add index to state so ternary operator can to determine if active should be added to tr
   };
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps(newProps) { //if new props from state.row appear add them to the rows object on component state
     if (newProps.row !== 0) {
       this.setState({
         rows: [...this.state.rows, newProps.row]
@@ -116,22 +114,10 @@ class QuoteRow extends Component {
 
 function mapStateToProps(state) {
   return {
-    quote: state.quote,
-    row: state.row
+    row: state.row //allow row of data which includes quote and rate to be accessible on props
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(
-    {
-      fetchData,
-      addRowToList
-    },
-    dispatch
-  );
-}
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(QuoteRow);

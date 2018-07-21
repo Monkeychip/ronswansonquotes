@@ -1,4 +1,4 @@
-import { FETCH_QUOTE, ADD_ROW } from "./types";
+import { FETCH_QUOTE, ADD_ROW, ADD_ROW_RETURN_NEW_QUOTE } from "./types";
 
 export function itemsHasErrored(bool) {
   return {
@@ -14,6 +14,7 @@ export function itemsIsLoading(bool) {
 }
 
 export function fetchData() {
+  console.log("here")
   return dispatch => {
     dispatch(itemsIsLoading(true));
     fetch("https://ron-swanson-quotes.herokuapp.com/v2/quotes")
@@ -41,5 +42,12 @@ export function addRowToList(data) {
   return {
     type: ADD_ROW,
     payload: data
-  };
+  }
+}
+
+export function addRowReturnNewQuote(data) {
+ return dispatch => {
+  dispatch(addRowToList(data))
+  dispatch(fetchData())
+ }
 }

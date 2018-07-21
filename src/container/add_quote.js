@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { fetchData, addRowToList } from "../actions/action_index";
+import { fetchData, addRowReturnNewQuote } from "../actions/action_index";
 import "../App.css";
 
 class AddQuote extends Component {
@@ -10,16 +10,19 @@ class AddQuote extends Component {
     super();
     this.addRow = this.addRow.bind(this);
     this.state = {
-      inputValue: ""
+      inputValue: "" //initialize inputValue to nothing, used to keep track of quote's rating
     };
   }
 
   addRow = () => {
     const data = {
-      quote: this.props.quote[0],
-      rate: this.state.inputValue
+      quote: this.props.quote[0], //pulling quote from Redux store
+      rate: this.state.inputValue //pulling rate number from inputValue on component's state
     };
-    this.props.addRowToList(data);
+    this.props.addRowReturnNewQuote(data); //passing to action creator addRowReturnNewQUote, saving on Redux Store to retrieve in sibling component
+    this.setState({
+      inputValue: ""
+    });
   };
 
   updateInputValue(evt) {
@@ -29,12 +32,12 @@ class AddQuote extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchData();
+    this.props.fetchData(); //update the displayed quote
   }
 
   render() {
     const { handleSubmit } = this.props;
-
+    let rateSuggestion = (Math.floor((Math.random() * 10) + 1));
     return (
       <div>
         <table className="ui celled padded table">
@@ -52,7 +55,7 @@ class AddQuote extends Component {
                       <input
                         className="center aligned"
                         type="number"
-                        placeholder="5"
+                        placeholder={`maybe a ${rateSuggestion}?`}
                         value={this.state.inputValue}
                         onChange={evt => this.updateInputValue(evt)}
                       />
@@ -79,15 +82,15 @@ class AddQuote extends Component {
 
 function mapStateToProps(state) {
   return {
-    quote: state.quote
+    quote: state.quote //return the quote from the Redux store, and make accessible via props
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      fetchData,
-      addRowToList
+      fetchData, //bind the action creator so that fetchData is called every time component mounts
+      addRowReturnNewQuote  //bind so that component can send data to this action creator
     },
     dispatch
   );
