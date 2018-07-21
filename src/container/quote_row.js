@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { createSelector } from "reselect";
 
-import { addRowToList } from "../actions/action_index";
 import "../App.css";
 
 class QuoteRow extends Component {

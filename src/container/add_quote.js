@@ -20,6 +20,9 @@ class AddQuote extends Component {
       rate: this.state.inputValue //pulling rate number from inputValue on component's state
     };
     this.props.addRowToList(data); //passing to action creator addRowToList, saving on Redux Store to retrieve in sibling component
+    this.setState({
+      inputValue: ""
+    });
   };
 
   updateInputValue(evt) {
@@ -34,7 +37,7 @@ class AddQuote extends Component {
 
   render() {
     const { handleSubmit } = this.props;
-
+    let rateSuggestion = Math.floor((Math.random() * 10) + 1);
     return (
       <div>
         <table className="ui celled padded table">
@@ -52,7 +55,7 @@ class AddQuote extends Component {
                       <input
                         className="center aligned"
                         type="number"
-                        placeholder="5"
+                        placeholder={`maybe a ${rateSuggestion}?`}
                         value={this.state.inputValue}
                         onChange={evt => this.updateInputValue(evt)}
                       />

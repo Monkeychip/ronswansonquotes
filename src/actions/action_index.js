@@ -38,6 +38,9 @@ export function fetchQuote(quote) {
 }
 
 export function addRowToList(data) {
+  return dispatch => {
+    dispatch(fetchData())
+  }
   return {
     type: ADD_ROW,
     payload: data
