@@ -71,7 +71,7 @@ class QuoteRow extends Component {
   render(){
     return (
       <div>
-        <table className="ui celled padded table">
+        <table className="ui celled padded selectable table">
         <thead>
           <tr >
             <th className="ui blue Change" onClick={() => this.sortBy('quote')}>Quote</th>
