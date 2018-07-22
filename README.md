@@ -5,6 +5,7 @@ A dynamic list container.  Loads initially with example data.  Ability to add mo
 ## Getting Started
 
  * clone the repo
+ * cd into the repo
  * `npm install`
  * `npm run start`
  
