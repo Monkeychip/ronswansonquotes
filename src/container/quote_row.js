@@ -11,7 +11,8 @@ type State = {
 }
 
 type Props = {
-  /**/
+  quote: string,
+  rate: number
 }
 
 export class QuoteRow extends Component<Props, State> {
@@ -41,15 +42,15 @@ export class QuoteRow extends Component<Props, State> {
     };
   }
 
-  compareBy(key : number) {
-    return function(a : string, b: string) {
+  compareBy(key? : string) {
+    return function(a : any, b: any) { //either object with key number (rate) or object with key string (quote)
       if (a[key] < b[key]) return -1;
       if (a[key] > b[key]) return 1;
       return 0;
     };
   }
 
-  sortBy(key : number) { //sort the array of rows based on either rate or quote
+  sortBy(key? : string) { //sort the array of rows based on either rate or quote
     let arrayCopy = [...this.state.rows];
     arrayCopy.sort(this.compareBy(key));
     this.setState({ rows: arrayCopy });

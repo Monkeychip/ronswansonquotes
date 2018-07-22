@@ -82,7 +82,7 @@ export class AddQuote extends Component<Props,State> {
                   type="submit"
                   className="ui button blue Change"
                   onClick={this.addRow}
-                >
+                  >
                   Add Quote
                 </button>
               </td>

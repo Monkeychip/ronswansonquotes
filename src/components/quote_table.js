@@ -1,21 +1,22 @@
 // @flow
 
-import React, { Component } from "react";
+import { Component } from "react";
+import * as React from 'react';
 
 import "../App.css";
 import QuoteRow from "../container/quote_row";
 import AddQuote from "../container/add_quote";
 
-type Props = { handleSubmit: any };
-
-class QuoteTable extends Component<Props> {
+class QuoteTable extends Component<*> {
 
   render() {
     return (
       <div className="ui container">
         <div className="four wide column center aligned">
+          {/* #FlowExpectError - required property handleSubmit is not passed */}
           <AddQuote />
         </div>
+        {/* #FlowExpectError - required property quote is not passed */}
           <QuoteRow />
       </div>
     );

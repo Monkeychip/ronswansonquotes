@@ -1,35 +1,36 @@
+// @flow
 
+import { FETCH_QUOTE, ADD_ROW, ITEM_HAS_ERRORED, ITEM_IS_LOADING } from "./types";
 
-import { FETCH_QUOTE, ADD_ROW } from "./types";
-
-export function itemsHasErrored(bool: boolean) {
+export function itemHasErrored(bool: boolean) {
   return {
-    type: "ITEMS_HAS_ERRORED",
+    type: ITEM_HAS_ERRORED,
     hasErrored: bool
   };
 }
-export function itemsIsLoading(bool: boolean) {
+
+export function itemIsLoading(bool: boolean) {
   return {
-    type: "ITEMS_IS_LOADING",
+    type: ITEM_IS_LOADING,
     isLoading: bool
   };
 }
 
 export function fetchData() {
 
-  return dispatch => {
-    dispatch(itemsIsLoading(true));
+  return (dispatch: Dispatch<*>) => {
+    dispatch(itemIsLoading(true));
     fetch("https://ron-swanson-quotes.herokuapp.com/v2/quotes")
       .then(response => {
         if (!response.ok) {
           throw Error(response.statusText);
         }
-        dispatch(itemsIsLoading(false));
+        dispatch(itemIsLoading(false));
         return response;
       })
       .then(response => response.json())
       .then(items => dispatch(fetchQuote(items)))
-      .catch(() => dispatch(itemsHasErrored(true)));
+      .catch(() => dispatch(itemHasErrored(true)));
   };
 }
 
@@ -48,7 +49,7 @@ export function addRowToList(data: Array<any>) {
 }
 
 export function addRowReturnNewQuote(data: Array<any>) {
- return dispatch => {
+ return (dispatch: Dispatch<*>) => {
   dispatch(addRowToList(data))
   dispatch(fetchData())
  }
