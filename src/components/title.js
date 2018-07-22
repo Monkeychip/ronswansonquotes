@@ -1,9 +1,14 @@
+// @flow
+
 import React, { Component } from "react";
 
 import RonsHead from "../images/ronavatar.jpg";
 import "../App.css";
 
-class Title extends Component {
+type Props = { /* ... */ };
+
+class Title extends Component<Props> {
+
   render() {
     return (
       <div>

@@ -11,17 +11,6 @@ module.exports = {
             }
           }
         ],
-        exclude: [
-          /\.html$/,
-          /\.(js|jsx)$/,
-          /\.css$/,
-          /\.scss$/,
-          /\.json$/,
-          /\.bmp$/,
-          /\.gif$/,
-          /\.jpe?g$/,
-          /\.png$/,
-        ],
         loader: 'file-loader',
       }
     ]

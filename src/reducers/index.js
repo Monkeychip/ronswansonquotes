@@ -1,4 +1,6 @@
-import { combineReducers, createStore } from "redux";
+// @flow
+
+import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
 
 import fetchQuoteReducer from "./reducer_fetchQuote";
@@ -10,7 +12,13 @@ const appReducer = combineReducers({
   row: addRowToList
 });
 
-const rootReducer = (state, action) => {
+const initialState = {
+  form: [],
+  quote: 0,
+  row: 0
+}
+
+const rootReducer = (state :Object = initialState, action: Object) => {
   return appReducer(state, action);
 };
 

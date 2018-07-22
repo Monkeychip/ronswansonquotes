@@ -1,12 +1,14 @@
-import { FETCH_QUOTE, ADD_ROW, ADD_ROW_RETURN_NEW_QUOTE } from "./types";
 
-export function itemsHasErrored(bool) {
+
+import { FETCH_QUOTE, ADD_ROW } from "./types";
+
+export function itemsHasErrored(bool: boolean) {
   return {
     type: "ITEMS_HAS_ERRORED",
     hasErrored: bool
   };
 }
-export function itemsIsLoading(bool) {
+export function itemsIsLoading(bool: boolean) {
   return {
     type: "ITEMS_IS_LOADING",
     isLoading: bool
@@ -31,21 +33,21 @@ export function fetchData() {
   };
 }
 
-export function fetchQuote(quote) {
+export function fetchQuote(quote: string) {
   return {
     type: FETCH_QUOTE,
     payload: quote
   };
 }
 
-export function addRowToList(data) {
+export function addRowToList(data: Array<any>) {
   return {
     type: ADD_ROW,
     payload: data
   }
 }
 
-export function addRowReturnNewQuote(data) {
+export function addRowReturnNewQuote(data: Array<any>) {
  return dispatch => {
   dispatch(addRowToList(data))
   dispatch(fetchData())

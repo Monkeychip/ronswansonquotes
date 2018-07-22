@@ -1,9 +1,21 @@
+// @flow
+
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import "../App.css";
 
-export class QuoteRow extends Component {
+type State = {
+  activeIndex: number,
+  rows: Array<any>
+}
+
+type Props = {
+  /**/
+}
+
+export class QuoteRow extends Component<Props, State> {
+
   constructor() {
     super();
     this.sortBy.bind(this);
@@ -29,33 +41,34 @@ export class QuoteRow extends Component {
     };
   }
 
-  compareBy(key) {
-    return function(a, b) {
+  compareBy(key : number) {
+    return function(a : string, b: string) {
       if (a[key] < b[key]) return -1;
       if (a[key] > b[key]) return 1;
       return 0;
     };
   }
 
-  sortBy(key) { //sort the array of rows based on either rate or quote
+  sortBy(key : number) { //sort the array of rows based on either rate or quote
     let arrayCopy = [...this.state.rows];
     arrayCopy.sort(this.compareBy(key));
     this.setState({ rows: arrayCopy });
   }
 
   //curried function
-  removeRow = index => () => {
+  removeRow = (index : number) => () => {
     const rows = [...this.state.rows];
     rows.splice(index, 1); //remove the row based on index
     this.setState({ rows }); //update rows state without the deleted row
   };
 
   //curried function
-  handleSelect = index => () => {
+  handleSelect = (index : number) => () => {
     this.setState({ activeIndex: index }); //add index to state so ternary operator can to determine if active should be added to tr
   };
 
-  componentWillReceiveProps(newProps) { //if new props from state.row appear add them to the rows object on component state
+    componentWillReceiveProps(newProps : *) { //if new props from state.row appear add them to the rows object on component state
+
     if (newProps.row !== 0) {
       this.setState({
         rows: [...this.state.rows, newProps.row]

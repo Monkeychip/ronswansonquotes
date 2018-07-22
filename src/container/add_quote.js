@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -5,7 +7,18 @@ import { bindActionCreators } from "redux";
 import { fetchData, addRowReturnNewQuote } from "../actions/action_index";
 import "../App.css";
 
-export class AddQuote extends Component {
+type Props = {
+  quote: string,
+  addRowReturnNewQuote: any,
+  fetchData: any,
+  handleSubmit: KeyboardEvent
+};
+type State = {
+  inputValue: any,
+}
+
+export class AddQuote extends Component<Props,State> {
+
   constructor() {
     super();
     this.addRow = this.addRow.bind(this);
@@ -26,9 +39,9 @@ export class AddQuote extends Component {
     });
   };
 
-  updateInputValue(evt) {
+  updateInputValue = ({target}: SyntheticInputEvent<>) => {
     this.setState({
-      inputValue: evt.target.value
+      inputValue: target.value
     });
   }
 
@@ -58,7 +71,7 @@ export class AddQuote extends Component {
                         type="number"
                         placeholder={`maybe a ${rateSuggestion}?`}
                         value={this.state.inputValue}
-                        onChange={evt => this.updateInputValue(evt)}
+                        onChange={this.updateInputValue}
                       />
                     </div>
                   </div>
@@ -87,7 +100,7 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch : Dispatch<*>) {
   return bindActionCreators(
     {
       fetchData, //bind the action creator so that fetchData is called every time component mounts
@@ -101,3 +114,5 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(AddQuote);
+
+//const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(actions, dispatch)
