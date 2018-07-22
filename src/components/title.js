@@ -16,6 +16,7 @@ class Title extends Component<*> {
               src={RonsHead}
               className="ui centered aligned circular image medium"
               id="ron_image"
+              alt=""
             />
           </div>
           <h2>Rate Ron's Quotes</h2>
