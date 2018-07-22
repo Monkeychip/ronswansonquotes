@@ -5,7 +5,7 @@ import Title from '../title';
 
 Enzyme.configure({adapter: new Adapter()});
 
-test('quote table renders correctly', () => {
+test('title renders correctly', () => {
   const component = shallow(<Title />)
   expect(component).toMatchSnapshot();
 })

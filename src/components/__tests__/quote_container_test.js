@@ -1,11 +1,11 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import QuoteList from '../quote_table';
+import QuoteContainer from '../quote_container';
 
 Enzyme.configure({adapter: new Adapter()});
 
-test('quote table renders correctly', () => {
-  const component = shallow(<QuoteList />)
+test('quote container renders correctly', () => {
+  const component = shallow(<QuoteContainer />)
   expect(component).toMatchSnapshot();
 })

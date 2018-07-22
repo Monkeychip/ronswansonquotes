@@ -5,7 +5,7 @@ import { QuoteRow } from '../quote_row';
 
 Enzyme.configure({adapter: new Adapter()});
 
-test('quote table renders correctly', () => {
+test('quote row renders correctly', () => {
   const component = shallow(<QuoteRow />);
   expect(component).toMatchSnapshot();
 })

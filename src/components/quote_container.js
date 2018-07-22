@@ -7,7 +7,7 @@ import "../App.css";
 import QuoteRow from "../container/quote_row";
 import AddQuote from "../container/add_quote";
 
-class QuoteTable extends Component<*> {
+class QuoteContainer extends Component<*> {
 
   render() {
     return (
@@ -23,6 +23,6 @@ class QuoteTable extends Component<*> {
   }
 }
 
-export default QuoteTable;
+export default QuoteContainer;
 
 

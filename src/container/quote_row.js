@@ -43,7 +43,7 @@ export class QuoteRow extends Component<Props, State> {
   }
 
   compareBy(key? : string) {
-    return function(a : any, b: any) { //either object with key number (rate) or object with key string (quote)
+    return function(a : any, b: any) { //either type object with key number (rate) or object with key string (quote)
       if (a[key] < b[key]) return -1;
       if (a[key] > b[key]) return 1;
       return 0;
@@ -56,20 +56,17 @@ export class QuoteRow extends Component<Props, State> {
     this.setState({ rows: arrayCopy });
   }
 
-  //curried function
   removeRow = (index : number) => () => {
     const rows = [...this.state.rows];
     rows.splice(index, 1); //remove the row based on index
     this.setState({ rows }); //update rows state without the deleted row
   };
 
-  //curried function
   handleSelect = (index : number) => () => {
     this.setState({ activeIndex: index }); //add index to state so ternary operator can to determine if active should be added to tr
   };
 
-    componentWillReceiveProps(newProps : *) { //if new props from state.row appear add them to the rows object on component state
-
+  componentWillReceiveProps(newProps : *) { //if new props from state.row appear add them to the rows object on component state
     if (newProps.row !== 0) {
       this.setState({
         rows: [...this.state.rows, newProps.row]
@@ -128,7 +125,7 @@ export class QuoteRow extends Component<Props, State> {
 
 function mapStateToProps(state) {
   return {
-    row: state.row //allow row of data which includes quote and rate to be accessible on props
+    row: state.row //allow row object containing quote and rate to be accessible on props
   };
 }
 

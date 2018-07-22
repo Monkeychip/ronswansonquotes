@@ -22,6 +22,7 @@ export class AddQuote extends Component<Props,State> {
   constructor() {
     super();
     this.addRow = this.addRow.bind(this);
+    this.updateInputValue= this.updateInputValue.bind(this);
     this.state = {
       inputValue: "", //initialize inputValue to nothing, used to keep track of quote's rating
       quote: ""
@@ -31,9 +32,9 @@ export class AddQuote extends Component<Props,State> {
   addRow = () => {
     const data = {
       quote: this.props.quote[0], //pulling quote from Redux store
-      rate: this.state.inputValue //pulling rate number from inputValue on component's state
+      rate: this.state.inputValue //pulling rate from inputValue on component's state
     };
-    this.props.addRowReturnNewQuote(data); //passing to action creator addRowReturnNewQUote, saving on Redux Store to retrieve in sibling component
+    this.props.addRowReturnNewQuote(data); //passing to action creator addRowReturnNewQuote, saving on Redux Store to retrieve in sibling component
     this.setState({
       inputValue: ""
     });
@@ -114,5 +115,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(AddQuote);
-
-//const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators(actions, dispatch)

@@ -5,9 +5,7 @@ import React, { Component } from "react";
 import RonsHead from "../images/ronavatar.jpg";
 import "../App.css";
 
-type Props = { /* ... */ };
-
-class Title extends Component<Props> {
+class Title extends Component<*> {
 
   render() {
     return (
